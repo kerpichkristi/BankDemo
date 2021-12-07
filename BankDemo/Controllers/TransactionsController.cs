@@ -20,173 +20,247 @@ namespace BankDemo.Controllers
     {
 
         private readonly IConfiguration _configuration;
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _applicationDbcontext;
 
         public TransactionsController(IConfiguration configuration, ApplicationDbContext applicationDbContext)
         {
 
             _configuration = configuration;
-            _context = applicationDbContext;
+            _applicationDbcontext = applicationDbContext;
         }
 
 
 
-        /*[HttpGet]
+        [HttpGet]
         [Authorize(Roles = "Administrator")]
         //POST : /api/Transactions
 
         public async Task<ActionResult<IEnumerable<TransactionModel>>> Transactions()
         {
-            List<TransactionModel> TransactionModel = new List<TransactionModel>();
-            List<TransactionModel> transactionModels = await _context.TransactionModels.ToListAsync();
+            List<TransactionModel> TransactionViewModel = new List<TransactionModel>();
+            List<TransactionModel> transactionModels = await _applicationDbcontext.TransactionModels.ToListAsync();
             foreach (TransactionModel transactionModel in transactionModels)
             {
-                TransactionModel.Add(new TransactionModel()
+                TransactionViewModel.Add(new TransactionModel()
                 {
                     Transactions_Id = transactionModel.Transactions_Id,
-                    Date = transactionModel.Date,
+                   // Date = transactionModel.Date,
                     Debit = transactionModel.Debit,
                     Credit = transactionModel.Credit,
                     Sender = transactionModel.Sender,
                     Receiver = transactionModel.Receiver
                 });
             }
-            return TransactionModel;
-        }*/
-
-
-        [HttpGet]
-        //[Route("Select")]
-        //GET : /api/Transactions
-        public JsonResult Get()
-        {
-            string query = @"
-                 select transactions_id as ""Transactions_id"",
-                     sender as ""Sender"",
-                     receiver as ""Receiver"",
-                     debit as ""Debit"",
-                     credit as ""Credit"",
-                     date as ""Date""
-
-                 from transactions";
-
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
-            NpgsqlDataReader myReader;
-            using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
-            return new JsonResult(table);
-
+            return TransactionViewModel;
         }
 
-        [HttpPost]
-        //[Route("Insert")]
-        //POST : /api/Transactions
-        public JsonResult Post(TransactionModel model)
-        {
-            string query = @"
-             insert into transactions(sender,receiver,debit,credit)
-                     values (@sender,@receiver,@debit,@credit)";
+        /*  [HttpGet("{Transactions_Id}")]
+          [Authorize(Roles = "Administrator")]
+          //POST : /api/Transactions
 
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
-            NpgsqlDataReader myReader;
-            using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
-                {
-                    myCommand.Parameters.AddWithValue("@sender", model.Sender);
-                    myCommand.Parameters.AddWithValue("@receiver", model.Receiver);
-                    myCommand.Parameters.AddWithValue("@debit", model.Debit);
-                    myCommand.Parameters.AddWithValue("@credit", model.Credit);
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
+          public async Task<ActionResult<TransactionModel>> GetTransactions(int transactions_id)
+          {
+              var transactionModel = await _applicationDbcontext.TransactionModels.FindAsync(transactions_id);
 
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
-            return new JsonResult("Added Succesfully");
-        }
+              if (transactionModel == null)
+              {
+                  return NotFound();
+              }
+
+              TransactionModel TransactionViewModel = new TransactionModel()
+                  {
+                      Transactions_Id = transactionModel.Transactions_Id,
+                      //Date = transactionModel.Date,
+                      Debit = transactionModel.Debit,
+                      Credit = transactionModel.Credit,
+                      Sender = transactionModel.Sender,
+                      Receiver = transactionModel.Receiver
+                  };
+
+              return TransactionViewModel;
+          }
+
+          // DELETE: api/Users/5
+          [HttpDelete("{Transactions_Id}")]
+          [Authorize(Roles = "Administrator")]
+          public async Task<ActionResult<TransactionModel>> DeleteTransaction(int transactions_id)
+          {
+              var transactionModel = await _applicationDbcontext.TransactionModels.FindAsync(transactions_id);
+              if (transactionModel == null)
+              {
+                  return NotFound();
+              }
+
+              _applicationDbcontext.TransactionModels.Remove(transactionModel);
+              await _applicationDbcontext.SaveChangesAsync();
+
+              return new TransactionModel()
+              {
+                  Transactions_Id = transactionModel.Transactions_Id,
+                  //Date = transactionModel.Date,
+                  Debit = transactionModel.Debit,
+                  Credit = transactionModel.Credit,
+                  Sender = transactionModel.Sender,
+                  Receiver = transactionModel.Receiver
+              };
+          }
+
+          // PUT: api/Users/5
+          [HttpPut("{Transactions_Id}")]
+          [Authorize(Roles = "Administrator")]
+          public async Task<ActionResult> PutUser(int transactions_id, TransactionModel model)
+          {
+              if (transactions_id != model.Transactions_Id)
+              {
+                  return BadRequest();
+              }
+
+              var transactionModel = await _applicationDbcontext.TransactionModels.FindAsync(transactions_id);
+              if (transactionModel == null)
+              {
+                  return NotFound();
+              }
+              _applicationDbcontext.Entry(transactionModel).State = EntityState.Modified;
+
+              return NoContent();
+          }
+  */
 
 
 
-        [HttpPut]
-        //[Route("Update")]
-        //PUT : /api/Transactions
-        public JsonResult Put(TransactionModel model)
-        {
-            string query = @"
-             update transactions
-             set 
-             sender = @sender,
-             receiver = @receiver,
-             debit = @debit,
-             credit = @credit,
-             data = @data
+        ////////////////////////////////////////////////////////////////////////////////
+        /* [HttpGet]
+         //[Route("Select")]
+         //GET : /api/Transactions
+         public JsonResult Get()
+         {
+             string query = @"
+                  select transactions_id as ""Transactions_id"",
+                      sender as ""Sender"",
+                      receiver as ""Receiver"",
+                      debit as ""Debit"",
+                      credit as ""Credit"",
+                      date as ""Date""
 
-             where transactions_id = @transactions_id";
+                  from transactions";
 
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
-            NpgsqlDataReader myReader;
-            using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
-                {
-                    myCommand.Parameters.AddWithValue("@transactions_id", model.Transactions_Id);
-                    myCommand.Parameters.AddWithValue("@sender", model.Sender);
-                    myCommand.Parameters.AddWithValue("@receiver", model.Receiver);
-                    myCommand.Parameters.AddWithValue("@debit", model.Debit);
-                    myCommand.Parameters.AddWithValue("@credit", model.Credit);
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
+             DataTable table = new DataTable();
+             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+             NpgsqlDataReader myReader;
+             using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource))
+             {
+                 myCon.Open();
+                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
+                 {
+                     myReader = myCommand.ExecuteReader();
+                     table.Load(myReader);
+                     myReader.Close();
+                     myCon.Close();
+                 }
+             }
+             return new JsonResult(table);
 
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
-            return new JsonResult("Update Succesfully");
-        }
-        [HttpDelete]
-        //[Route("Delete")]
-        //DELETE : /api/Transactions
-        public JsonResult Delete(TransactionModel model)
-        {
-            string query = @"
-             delete from transactions
+         }
 
-             where transactions_id = @transactions_id";
+         [HttpPost]
+         //[Route("Insert")]
+         //POST : /api/Transactions
+         public JsonResult Post(TransactionModel model)
+         {
+             string query = @"
+              insert into transactions(sender,receiver,debit,credit)
+                      values (@sender,@receiver,@debit,@credit)";
 
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
-            NpgsqlDataReader myReader;
-            using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
-                {
-                    myCommand.Parameters.AddWithValue("@transactions_id", model.Transactions_Id);
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
+             DataTable table = new DataTable();
+             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+             NpgsqlDataReader myReader;
+             using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource))
+             {
+                 myCon.Open();
+                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
+                 {
+                     myCommand.Parameters.AddWithValue("@sender", model.Sender);
+                     myCommand.Parameters.AddWithValue("@receiver", model.Receiver);
+                     myCommand.Parameters.AddWithValue("@debit", model.Debit);
+                     myCommand.Parameters.AddWithValue("@credit", model.Credit);
+                     myReader = myCommand.ExecuteReader();
+                     table.Load(myReader);
 
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
-            return new JsonResult("Delete Succesfully");
-        }
+                     myReader.Close();
+                     myCon.Close();
+                 }
+             }
+             return new JsonResult("Added Succesfully");
+         }
+
+
+
+         [HttpPut]
+         //[Route("Update")]
+         //PUT : /api/Transactions
+         public JsonResult Put(TransactionModel model)
+         {
+             string query = @"
+              update transactions
+              set 
+              sender = @sender,
+              receiver = @receiver,
+              debit = @debit,
+              credit = @credit,
+              data = @data
+
+              where transactions_id = @transactions_id";
+
+             DataTable table = new DataTable();
+             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+             NpgsqlDataReader myReader;
+             using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource))
+             {
+                 myCon.Open();
+                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
+                 {
+                     myCommand.Parameters.AddWithValue("@transactions_id", model.Transactions_Id);
+                     myCommand.Parameters.AddWithValue("@sender", model.Sender);
+                     myCommand.Parameters.AddWithValue("@receiver", model.Receiver);
+                     myCommand.Parameters.AddWithValue("@debit", model.Debit);
+                     myCommand.Parameters.AddWithValue("@credit", model.Credit);
+                     myReader = myCommand.ExecuteReader();
+                     table.Load(myReader);
+
+                     myReader.Close();
+                     myCon.Close();
+                 }
+             }
+             return new JsonResult("Update Succesfully");
+         }
+         [HttpDelete]
+         //[Route("Delete")]
+         //DELETE : /api/Transactions
+         public JsonResult Delete(TransactionModel model)
+         {
+             string query = @"
+              delete from transactions
+
+              where transactions_id = @transactions_id";
+
+             DataTable table = new DataTable();
+             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+             NpgsqlDataReader myReader;
+             using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource))
+             {
+                 myCon.Open();
+                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
+                 {
+                     myCommand.Parameters.AddWithValue("@transactions_id", model.Transactions_Id);
+                     myReader = myCommand.ExecuteReader();
+                     table.Load(myReader);
+
+                     myReader.Close();
+                     myCon.Close();
+                 }
+             }
+             return new JsonResult("Delete Succesfully");
+         }*/
 
 
     }
