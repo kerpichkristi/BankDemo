@@ -26,12 +26,5 @@ export class LoginComponent implements OnInit {
   login(form: NgForm) {
     this.userService.login(form.value);
   }
-  logout() {
-   // this.authorizedUser$.next(undefined);
-    localStorage.removeItem('token');
-    this.router.navigateByUrl('/');
-  }
-  authorizedUser() {
-    return localStorage.getItem('token') != null;
-  }
+ 
 }

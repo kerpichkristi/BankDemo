@@ -59,6 +59,9 @@ export class UserService {
     localStorage.removeItem('token');
     this.router.navigateByUrl('/');
   }
+
+ 
+
   authorizedUser() {
     return localStorage.getItem('token') != null;
   }
@@ -103,6 +106,26 @@ export class UserService {
     }
     return match;
   }
+
+  public get(Id?) {
+    if (Id) {
+      return this.httpClient.get(this.baseUrl + this.apiUrl + Id);
+    }
+    else {
+      return this.httpClient.get(this.baseUrl + this.apiUrl);
+    }
+  }
+  delete(Id) {
+    return this.httpClient.delete(this.baseUrl + this.apiUrl + Id);
+  }
+  put(user) {
+    return this.httpClient.put(this.baseUrl + this.apiUrl + user.Id, user);
+  }
+
+  public getRoles() {
+    return this.httpClient.get(this.baseUrl + this.apiUrl + 'GetRoles');
+  }
+  
 }
 
 export interface AuthorizedUser {
