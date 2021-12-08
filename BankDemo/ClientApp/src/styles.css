@@ -19,14 +19,15 @@ html, body {
   height: 100%;
 }
 
+.ng-container {
+  display: flex;
+}
 body {
-  margin: 0;
+
+  width: 100%; 
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .material-icons {
   vertical-align: middle;
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

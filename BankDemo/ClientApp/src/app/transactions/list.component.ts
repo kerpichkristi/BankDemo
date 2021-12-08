@@ -11,19 +11,14 @@ import { TransactionService } from "./transactions.service";
 })
 
 export class TransactionsListComponent implements OnInit, AfterViewInit {
-  columns: string[] = ['Transactions_Id', 'Sender', 'Receiver','Credit','Debit', 'Date'];//, 'details-edit-delete'
+  columns: string[] = ['Transactions_Id', 'Sender', 'Receiver', 'Credit', 'Debit', 'Date', 'details-edit-delete'];
   dataSource = new MatTableDataSource<Transactions>();
-
+  
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private transactionService: TransactionService) {
-    this.dataSource.filterPredicate = (transaction: Transactions, filter) => {
-      return transaction.Sender.toLowerCase().includes(filter.toLowerCase()) ||
-        transaction.Receiver.toLowerCase().includes(filter.toLowerCase());
-    }
-  }
-
+  constructor(private transactionService: TransactionService) {}
+  
   ngOnInit() {
     this.get();
   }
@@ -40,10 +35,11 @@ export class TransactionsListComponent implements OnInit, AfterViewInit {
       });
   }
 
-  public filter(filter) {
-    this.dataSource.filter = filter.trim().toLowerCase();
+  public filter(filter: string) {
+  this.dataSource.filter = filter.trim().toLocaleLowerCase();
+    
   }
-/*
+
   delete(Id) {
     if (confirm('Are you sure to delete this record?')) {
       this.transactionService.delete(Id)
@@ -54,5 +50,7 @@ export class TransactionsListComponent implements OnInit, AfterViewInit {
             console.log((err));
           })
     }
-  }*/
+  }
+
 }
+

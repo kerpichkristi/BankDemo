@@ -37,8 +37,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { ChartsModule } from 'ng2-charts'
+
 import { MatDatepickerModule } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material';
+
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE  } from '@angular/material/core';
+
+import { MY_FORMATS } from './transactions/my-date-formats';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 import 'hammerjs';
 
@@ -69,12 +76,16 @@ import 'hammerjs';
       { path: '', component: HomeComponent, pathMatch: 'full' },
 
       { path: 'users', component: UsersIndexComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } },
+      
+      { path: 'users/register', component: RegisterComponent },
+      { path: 'users/login', component: LoginComponent },
+
+
+      { path: 'administration', component: AdministrationComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } },
+
       { path: 'users/:id', component: UserDetailsComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } },
       { path: 'users/edit/:id', component: UserEditComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } },
 
-      { path: 'users/register', component: RegisterComponent },
-      { path: 'users/login', component: LoginComponent },
-      { path: 'administration', component: AdministrationComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } },
 
       { path: 'transactions', component: TransactionsIndexComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] }}
 
@@ -92,14 +103,27 @@ import 'hammerjs';
     MatDividerModule,
     MatListModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+   
   ],
-  providers: [UserService, TransactionService,
+  providers: [ 
     {
-      provide: HTTP_INTERCEPTORS,
+      provide: HTTP_INTERCEPTORS ,
+      
       useClass: AuthorizeInterceptor,
       multi: true
-    }],
+    },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: MY_FORMATS,
+    },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE]
+    },
+    UserService,
+    TransactionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

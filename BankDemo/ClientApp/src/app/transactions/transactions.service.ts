@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -19,7 +19,7 @@ export class TransactionService {
     this.baseUrl = baseUrl;
   }
 
-  public get(Transactions_Id?) {
+ public get(Transactions_Id?) {
     if (Transactions_Id) {
       return this.httpClient.get(this.baseUrl + this.apiUrl + Transactions_Id);
     }
@@ -27,12 +27,12 @@ export class TransactionService {
       return this.httpClient.get(this.baseUrl + this.apiUrl);
     }
   }
-/*
+
   delete(Id) {
     return this.httpClient.delete(this.baseUrl + this.apiUrl + Id);
   }
 
   put(user) {
     return this.httpClient.put(this.baseUrl + this.apiUrl + user.Id, user);
-  }*/
+  }
 }

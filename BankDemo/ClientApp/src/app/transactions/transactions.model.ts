@@ -1,9 +1,9 @@
 export class Transactions {
-  Transactions_Id: number;
+  Transactions_Id: string;
   Sender: string;
   Receiver: string;
-  Credit: number;
-  Debit: number;
-  
+  Credit: string;
+  Debit: string;
   Date: string;
 }
+
