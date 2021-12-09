@@ -137,7 +137,7 @@ namespace BankDemo.Controllers
             TransactionModel TransactionViewModel = new TransactionModel()
             {
                 Transactions_Id = transactionModel.Transactions_Id,
-                //Date = transactionModel.Date,
+                Date = transactionModel.Date,
                 Debit = transactionModel.Debit,
                 Credit = transactionModel.Credit,
                 Sender = transactionModel.Sender,
@@ -164,7 +164,7 @@ namespace BankDemo.Controllers
             return new TransactionModel()
             {
                 Transactions_Id = transactionModel.Transactions_Id,
-                //Date = transactionModel.Date,
+                Date = transactionModel.Date,
                 Debit = transactionModel.Debit,
                 Credit = transactionModel.Credit,
                 Sender = transactionModel.Sender,

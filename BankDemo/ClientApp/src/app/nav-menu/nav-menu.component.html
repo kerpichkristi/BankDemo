@@ -25,6 +25,11 @@
               Administration
             </a>
           </li>
+        <!--  <li *ngIf="!userService.authorizedUser()" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/pie-chart']">
+              Pie Chart
+            </a>
+          </li>-->
           <li *ngIf="!userService.authorizedUser()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/users/login']">
               Log in
@@ -35,6 +40,7 @@
               Register
             </a>
           </li>
+         
           <li *ngIf="userService.authorizedUser() && authorizedUser" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/']">{{authorizedUser.Email}}</a>
           </li>
@@ -48,3 +54,4 @@
     </div>
   </nav>
 </header>
+<script src="node_modules/chart.js/src/chart.js"></script>

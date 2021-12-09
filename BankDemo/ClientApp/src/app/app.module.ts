@@ -37,17 +37,19 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
-import { ChartsModule } from 'ng2-charts'
+
+import { ChartsModule, ThemeService } from 'ng2-charts';
+import { MyPieChartComponent } from './pie-chart/pie-chart.component';
+import { MyPieChart2Component } from './pie-chart/pie-chart2.component';
 
 import { MatDatepickerModule } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material';
-
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE  } from '@angular/material/core';
-
 import { MY_FORMATS } from './transactions/my-date-formats';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 import 'hammerjs';
+
 
 
 @NgModule({
@@ -66,9 +68,14 @@ import 'hammerjs';
     UsersListComponent,
     
     TransactionsIndexComponent,
-    TransactionsListComponent
+    TransactionsListComponent,
+  
+    MyPieChartComponent,
+    MyPieChart2Component
+    
   ],
   imports: [
+    
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
@@ -76,7 +83,8 @@ import 'hammerjs';
       { path: '', component: HomeComponent, pathMatch: 'full' },
 
       { path: 'users', component: UsersIndexComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } },
-      
+     
+
       { path: 'users/register', component: RegisterComponent },
       { path: 'users/login', component: LoginComponent },
 
@@ -87,7 +95,9 @@ import 'hammerjs';
       { path: 'users/edit/:id', component: UserEditComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } },
 
 
-      { path: 'transactions', component: TransactionsIndexComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] }}
+      { path: 'transactions', component: TransactionsIndexComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } },
+      { path: 'pie-chart', component: MyPieChartComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } },
+      { path: 'pie-chart2', component: MyPieChart2Component, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } }
 
     ]),
     ReactiveFormsModule,
@@ -104,6 +114,8 @@ import 'hammerjs';
     MatListModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    ChartsModule
+    
    
   ],
   providers: [ 
@@ -123,7 +135,9 @@ import 'hammerjs';
       deps: [MAT_DATE_LOCALE]
     },
     UserService,
-    TransactionService],
+    TransactionService,
+    ThemeService
+      ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
