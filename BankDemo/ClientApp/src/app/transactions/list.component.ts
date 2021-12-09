@@ -40,9 +40,9 @@ export class TransactionsListComponent implements OnInit, AfterViewInit {
     
   }
 
-  delete(Id) {
+  delete(Transactions_Id) {
     if (confirm('Are you sure to delete this record?')) {
-      this.transactionService.delete(Id)
+      this.transactionService.delete(Transactions_Id)
         .subscribe(() => {
           this.get();
         },

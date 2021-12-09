@@ -28,11 +28,11 @@ export class TransactionService {
     }
   }
 
-  delete(Id) {
-    return this.httpClient.delete(this.baseUrl + this.apiUrl + Id);
+  delete(Transactions_Id) {
+    return this.httpClient.delete(this.baseUrl + this.apiUrl + Transactions_Id);
   }
 
-  put(user) {
-    return this.httpClient.put(this.baseUrl + this.apiUrl + user.Id, user);
+  put(Transactions) {
+    return this.httpClient.put(this.baseUrl + this.apiUrl + Transactions.Transactions_Id, Transactions);
   }
 }

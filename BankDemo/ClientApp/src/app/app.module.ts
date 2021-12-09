@@ -23,8 +23,6 @@ import { UserEditComponent } from './users/edit.component';
 import { TransactionService } from './transactions/transactions.service';
 import { TransactionsIndexComponent } from './transactions/index.component';
 import { TransactionsListComponent } from './transactions/list.component';
-//import { TransactionsDetailsComponent } from './transactions/details.component';
-//import { TransactionsEditComponent } from './transactions/edit.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';

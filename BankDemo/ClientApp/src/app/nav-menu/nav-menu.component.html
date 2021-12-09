@@ -25,11 +25,6 @@
               Administration
             </a>
           </li>
-        <!--  <li *ngIf="!userService.authorizedUser()" class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/pie-chart']">
-              Pie Chart
-            </a>
-          </li>-->
           <li *ngIf="!userService.authorizedUser()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/users/login']">
               Log in

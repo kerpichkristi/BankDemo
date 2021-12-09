@@ -61,14 +61,10 @@ namespace BankDemo.Controllers
         public JsonResult PieChart1()
         {
             string query = @"
-                select transactions_id as ""Transactions_id"",
-                    sender as ""Sender"",
-                    receiver as ""Receiver"",
-                    debit as ""Debit"",
-                    credit as ""Credit"",
-                    date as ""Date""
-                    
-                from transactions";
+                select sender, sum(debit) as sumDebit
+                from transactions group by sender
+                order by SumDebit desc
+                limit 8;";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
@@ -94,14 +90,10 @@ namespace BankDemo.Controllers
         public JsonResult PieChart2()
         {
             string query = @"
-                select transactions_id as ""Transactions_id"",
-                    sender as ""Sender"",
-                    receiver as ""Receiver"",
-                    debit as ""Debit"",
-                    credit as ""Credit"",
-                    date as ""Date""
-                    
-                from transactions";
+                select sender, sum(credit) as sumcredit
+                from transactions group by sender
+                order by SumCredit desc
+                limit 8;";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
@@ -147,7 +139,7 @@ namespace BankDemo.Controllers
             return TransactionViewModel;
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Transactions/5
         [HttpDelete("{Transactions_Id}")]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<TransactionModel>> DeleteTransaction(int transactions_id)
@@ -172,7 +164,7 @@ namespace BankDemo.Controllers
             };
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Transactions/5
         [HttpPut("{Transactions_Id}")]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> PutUser(int transactions_id, TransactionModel model)
