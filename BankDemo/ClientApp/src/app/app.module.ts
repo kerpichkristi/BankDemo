@@ -37,8 +37,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 
 import { ChartsModule, ThemeService } from 'ng2-charts';
-import { MyPieChartComponent } from './pie-chart/pie-chart.component';
-import { MyPieChart2Component } from './pie-chart/pie-chart2.component';
+import { TransactionsPieChartComponent } from './pie-chart/pie-chart.component';
+import { TransactionsPieChart2Component } from './pie-chart/pie-chart2.component';
+
 
 import { MatDatepickerModule } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material';
@@ -68,8 +69,8 @@ import 'hammerjs';
     TransactionsIndexComponent,
     TransactionsListComponent,
   
-    MyPieChartComponent,
-    MyPieChart2Component
+    TransactionsPieChartComponent,
+    TransactionsPieChart2Component
     
   ],
   imports: [
@@ -94,8 +95,8 @@ import 'hammerjs';
 
 
       { path: 'transactions', component: TransactionsIndexComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } },
-      { path: 'pie-chart', component: MyPieChartComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } },
-      { path: 'pie-chart2', component: MyPieChart2Component, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } }
+      { path: 'pie-chart', component: TransactionsPieChartComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } },
+      { path: 'pie-chart2', component: TransactionsPieChart2Component, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } }
 
     ]),
     ReactiveFormsModule,

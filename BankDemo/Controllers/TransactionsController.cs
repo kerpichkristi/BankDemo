@@ -56,7 +56,7 @@ namespace BankDemo.Controllers
 
         [HttpGet]
         [Route("PieChart1")]
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         //POST : /api/Transactions/PieChart1
         public JsonResult PieChart1()
         {
@@ -85,7 +85,7 @@ namespace BankDemo.Controllers
         }
         [HttpGet]
         [Route("PieChart2")]
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         //POST : /api/Transactions/PieChart2
         public JsonResult PieChart2()
         {

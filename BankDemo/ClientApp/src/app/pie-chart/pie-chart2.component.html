@@ -1,7 +1,8 @@
-<h4>Debit-Senders</h4>
-<div style="display: block">
+<h4>Top-Debit-Senders</h4>
+<div *ngIf="chartDataReady" style="display: block">
   <canvas baseChart
           [data]="pieChartData"
           [labels]="pieChartLabels"
-          [chartType]="pieChartType"></canvas>
+          [chartType]="pieChartType">      
+  </canvas>
 </div>
