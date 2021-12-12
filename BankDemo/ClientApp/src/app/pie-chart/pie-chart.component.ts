@@ -12,7 +12,7 @@ export class TransactionsPieChartComponent implements OnInit {
   public pieChartType: ChartType = 'pie';
   public pieChartLabels: Label[];
   public pieChartData: ChartDataSets[];
-  chartDataReady = true;
+  //public chartDataReady = true;
 
   constructor(private http: HttpClient) { }
  

@@ -15,7 +15,7 @@ export class TransactionsPieChart2Component implements OnInit {
   public pieChartLabels: Label[];
   public pieChartData: ChartDataSets[];
   
-  public chartDataReady = true;
+  //public chartDataReady = true;
 
   constructor(private http: HttpClient) { }
 
@@ -23,17 +23,17 @@ export class TransactionsPieChart2Component implements OnInit {
   ngOnInit(){
 
   this.http.get('https://localhost:44353/api/Transactions/PieChart2').subscribe(
-    data => {
+    data1 => {
      
       var ChartData: any[] = [];
       var ChartLabels: any[] = [];
 
       for (var i = 0; i <= 7; i++) {
-        ChartLabels.push(data[i].sender);
+        ChartLabels.push(data1[i].sender);
       }
 
       for (var i = 0; i <= 7; i++) {
-        ChartData.push(data[i].sumcredit);
+        ChartData.push(data1[i].sumcredit);
       }
       
         this.pieChartData = [{ data: ChartData }];
