@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ChartType, ChartDataSets } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { Color, Label } from 'ng2-charts';
 
 
 @Component({
@@ -10,12 +10,24 @@ import { Label } from 'ng2-charts';
 })
 export class TransactionsPieChart2Component implements OnInit {
 
-
   public pieChartType: ChartType = 'pie';
   public pieChartLabels: Label[];
   public pieChartData: ChartDataSets[];
+  public pieChartColor: Color[] = [{
   
-  //public chartDataReady = true;
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.5)',
+      'rgba(169, 50, 38, 0.5)',
+      'rgba(118, 68, 138, 0.5)',
+      'rgba(31, 97, 141 , 0.5)',
+      'rgba(17, 122, 101 , 0.5)',
+      'rgba(35, 155, 86 , 0.5)',
+      'rgba(247, 220, 111, 0.5)',
+      'rgb(230, 126, 34, 0.5 )]']
+   }
+   
+  ]
+  
 
   constructor(private http: HttpClient) { }
 
@@ -38,9 +50,8 @@ export class TransactionsPieChart2Component implements OnInit {
       
         this.pieChartData = [{ data: ChartData }];
         this.pieChartLabels = ChartLabels;
-        this.pieChartData = ChartData;
-      console.log(this.pieChartLabels);
-      console.log(this.pieChartData);
+      this.pieChartData = ChartData;
+
 
       
       

@@ -12,7 +12,7 @@ export class TransactionsPieChartComponent implements OnInit {
   public pieChartType: ChartType = 'pie';
   public pieChartLabels: Label[];
   public pieChartData: ChartDataSets[];
-  //public chartDataReady = true;
+  
 
   constructor(private http: HttpClient) { }
  
@@ -35,8 +35,6 @@ export class TransactionsPieChartComponent implements OnInit {
         this.pieChartData = [{ data: ChartData }];
         this.pieChartLabels = ChartLabels;
         this.pieChartData = ChartData;
-        console.log(this.pieChartLabels);
-        console.log(this.pieChartData);
        
       },
       (err: HttpErrorResponse) => {
@@ -44,9 +42,3 @@ export class TransactionsPieChartComponent implements OnInit {
       });
   }
 }
-
- 
-
-/*public pieChartType = 'pie';
-public pieChartLabels = ['Sales Q1', 'Sales Q2', 'Sales Q3', 'Sales Q4'];
-public pieChartData = [120, 150, 180, 90];*/
