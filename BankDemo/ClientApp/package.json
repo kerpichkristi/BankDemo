@@ -8,7 +8,8 @@
     "build:ssr": "ng run BankDemo:server:dev",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "extract":"@ngx-translate-extract --input ./src --output ./src/assets/i18n/en.json --sort --clean --format namespaced-json"
   },
   "private": true,
   "dependencies": {
@@ -24,7 +25,10 @@
     "@angular/platform-browser-dynamic": "8.2.12",
     "@angular/platform-server": "8.2.12",
     "@angular/router": "8.2.12",
+    "@biesbjerg/ngx-translate-extract": "^7.0.4",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
+    "@ngx-translate/core": "^12.1.2",
+    "@ngx-translate/http-loader": "^5.0.0",
     "bootstrap": "^4.6.0",
     "chart.js": "^2.9.3",
     "core-js": "^3.8.3",

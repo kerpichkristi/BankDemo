@@ -11,7 +11,7 @@ import { TransactionService } from "./transactions.service";
 })
 
 export class TransactionsListComponent implements OnInit, AfterViewInit {
-  columns: string[] = ['Transactions_Id', 'Sender', 'Receiver', 'Credit', 'Debit', 'Date', 'details-edit-delete'];
+  columns: string[] = ['Transactions_Id', 'Sender', 'Receiver', 'Credit', 'Debit', 'Date', 'Delete'];
   dataSource = new MatTableDataSource<Transactions>();
   
   @ViewChild(MatSort, { static: true }) sort: MatSort;

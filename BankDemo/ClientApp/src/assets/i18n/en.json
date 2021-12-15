@@ -1,0 +1,42 @@
+{
+  "home": {
+    "title": "Home page"
+  },
+  "lang": {
+    "he": "Hebrew",
+    "en": "English"
+  },
+  "navbar": {
+    "registration": "Register",
+    "login": "Log In",
+    "logout": "Log Out",
+    "administration": "Administration",
+    "title": "Bank Demo"
+  },
+  "administration": {
+    "title": "Administration",
+    "users": "Users",
+    "transactions": "Transactions"
+
+  },
+  "users": {
+    "title": "Users",
+    "filter": "Filter",
+    "email": "Email",
+    "roles": "Roles"
+    
+  },
+  "transactions": {
+    "title": "Transactions",
+    "subtitle2": "Top-Credit-Senders",
+    "subtitle1": "Top-Debit-Senders",
+    "filter": "Filter",
+    "id": "Id",
+    "sender": "Sender",
+    "receiver": "Receiver",
+    "credit": "Credit",
+    "debit": "Debit",
+    "date": "Date"
+    
+  }
+}

@@ -10,13 +10,15 @@ import { Color, Label } from 'ng2-charts';
 })
 export class TransactionsPieChart2Component implements OnInit {
 
+
+  private NumberOfShownUsers = 7;
   public pieChartType: ChartType = 'pie';
   public pieChartLabels: Label[];
   public pieChartData: ChartDataSets[];
   public pieChartColor: Color[] = [{
   
     backgroundColor: [
-      'rgba(255, 99, 132, 0.5)',
+      'rgba(255, 150, 132, 0.5)',
       'rgba(169, 50, 38, 0.5)',
       'rgba(118, 68, 138, 0.5)',
       'rgba(31, 97, 141 , 0.5)',
@@ -35,19 +37,16 @@ export class TransactionsPieChart2Component implements OnInit {
   ngOnInit(){
 
   this.http.get('https://localhost:44353/api/Transactions/PieChart2').subscribe(
-    data1 => {
+    data => {
      
       var ChartData: any[] = [];
       var ChartLabels: any[] = [];
 
-      for (var i = 0; i <= 7; i++) {
-        ChartLabels.push(data1[i].sender);
+      for (var i = 0; i < this.NumberOfShownUsers; i++) {
+        ChartLabels.push(data[i].sender);
+        ChartData.push(data[i].sumcredit);
       }
 
-      for (var i = 0; i <= 7; i++) {
-        ChartData.push(data1[i].sumcredit);
-      }
-      
         this.pieChartData = [{ data: ChartData }];
         this.pieChartLabels = ChartLabels;
       this.pieChartData = ChartData;

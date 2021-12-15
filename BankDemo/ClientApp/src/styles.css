@@ -6,7 +6,7 @@ a {
 }
 
 code {
-  color: #e01a76;
+  color: #e01a76 ;
 }
 
 .btn-primary {
@@ -17,6 +17,7 @@ code {
 
 html, body {
   height: 100%;
+  background-color: rgb(255 255 255);
 }
 
 .ng-container {
@@ -31,3 +32,73 @@ body {
 .material-icons {
   vertical-align: middle;
 }
+
+.bg-white {
+  background-color: rgb(254 255 170)!important;
+
+}
+.mat-paginator {
+  background: rgb(255 255 255);
+}
+.mat-table {
+  background: rgb(255 255 255);
+}
+
+
+.row {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  box-orient: horizontal;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  box-align: center;
+  align-items: center;
+}
+
+.cell {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+}
+
+.custom-select {
+background:#feffaa;
+color:black;
+
+
+}
+#overflowTest {
+  display: flex;
+  background: white;
+  color: black;
+  margin: 10px;
+  width: 100%;
+  min-height: 50px;
+  overflow: auto;
+  border: 1px solid #ccc;
+  flex: 1 1 auto;
+}
+
+
+
+
+

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { TransactionService } from '../transactions/transactions.service';
 import { AuthorizedUser, UserService } from '../users/user.service';
 
 @Component({
@@ -10,9 +12,22 @@ export class NavMenuComponent {
   isExpanded = false;
   authorizedUser: AuthorizedUser;
 
-  constructor(private userService: UserService) { }
+  supportLanguages = ['en', 'he']
+
+  constructor(private userService: UserService, private translateService: TranslateService) {
+
+    this.translateService.addLangs(this.supportLanguages);
+    this.translateService.setDefaultLang('en');
+
+    const browserlang = this.translateService.getBrowserLang();
+    this.translateService.use(browserlang);
+
+  }
+    
 
   ngOnInit() {
+    
+
     this.userService.authorizedUser$.subscribe((authorizedUser: AuthorizedUser) => {
       this.authorizedUser = authorizedUser;
     });
@@ -27,5 +42,8 @@ export class NavMenuComponent {
   }
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+  selectLang(lang: string) {
+    this.translateService.use(lang);
   }
 }

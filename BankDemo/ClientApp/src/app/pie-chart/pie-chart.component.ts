@@ -9,6 +9,7 @@ import { Label } from 'ng2-charts';
 })
 export class TransactionsPieChartComponent implements OnInit {
 
+  private NumberOfShownUsers = 7;
   public pieChartType: ChartType = 'pie';
   public pieChartLabels: Label[];
   public pieChartData: ChartDataSets[];
@@ -24,14 +25,10 @@ export class TransactionsPieChartComponent implements OnInit {
        var ChartData: any[] = [];
        var ChartLabels: any[] = [];
 
-        for (var i = 0; i <= 7; i++) {
+        for (var i = 0; i < this.NumberOfShownUsers; i++) {
           ChartLabels.push(data[i].sender);
-        }
-
-        for (var i = 0; i <= 7; i++) {
           ChartData.push(data[i].sumdebit);
         }
-        
         this.pieChartData = [{ data: ChartData }];
         this.pieChartLabels = ChartLabels;
         this.pieChartData = ChartData;

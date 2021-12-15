@@ -15,38 +15,42 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }"
-      >
+      <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
+           [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
           <li *ngIf="userService.authorizedUser() && userService.allowedRole(['Administrator'])" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/administration']">
-              Administration
+              {{'navbar.administration' | translate}}
             </a>
           </li>
           <li *ngIf="!userService.authorizedUser()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/users/login']">
-              Log in
+              {{'navbar.login' | translate}}
             </a>
           </li>
           <li *ngIf="!userService.authorizedUser()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/users/register']">
-              Register
+              {{'navbar.registration' | translate}}
             </a>
           </li>
-         
+
           <li *ngIf="userService.authorizedUser() && authorizedUser" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/']">{{authorizedUser.Email}}</a>
           </li>
           <li *ngIf="userService.authorizedUser()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/']" (click)="userService.logout()">
-              Log Out
+              {{'navbar.logout' | translate}}
             </a>
+          </li>
+          <li>
+            <select class="custom-select" (click)="selectLang($event.target.value)">
+
+              <option value="en" [selected]="lang == 'en'">{{'lang.en' | translate}}</option>
+              <option value="he" [selected]="lang == 'he'">{{'lang.he' | translate}}</option>
+            </select>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </header>
-<script src="node_modules/chart.js/src/chart.js"></script>

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -40,15 +40,17 @@ import { ChartsModule, ThemeService } from 'ng2-charts';
 import { TransactionsPieChartComponent } from './pie-chart/pie-chart.component';
 import { TransactionsPieChart2Component } from './pie-chart/pie-chart2.component';
 
-
 import { MatDatepickerModule } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE  } from '@angular/material/core';
 import { MY_FORMATS } from './transactions/my-date-formats';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
-import 'hammerjs';
 
+
+import 'hammerjs';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -65,16 +67,22 @@ import 'hammerjs';
     UserDetailsComponent,
     UserEditComponent,
     UsersListComponent,
-    
+
     TransactionsIndexComponent,
     TransactionsListComponent,
-  
+
     TransactionsPieChartComponent,
     TransactionsPieChart2Component
-    
+
   ],
   imports: [
-    
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient) => { return new TranslateHttpLoader(http, '../../assets/i18n/', '.json'); },
+        deps: [HttpClient]
+      },
+    }),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
@@ -82,7 +90,7 @@ import 'hammerjs';
       { path: '', component: HomeComponent, pathMatch: 'full' },
 
       { path: 'users', component: UsersIndexComponent, canActivate: [AuthorizeGuard], data: { allowedRoles: ['Administrator'] } },
-     
+
 
       { path: 'users/register', component: RegisterComponent },
       { path: 'users/login', component: LoginComponent },
@@ -114,13 +122,13 @@ import 'hammerjs';
     MatNativeDateModule,
     MatDatepickerModule,
     ChartsModule
-    
-   
+
+
   ],
-  providers: [ 
+  providers: [
     {
-      provide: HTTP_INTERCEPTORS ,
-      
+      provide: HTTP_INTERCEPTORS,
+
       useClass: AuthorizeInterceptor,
       multi: true
     },
@@ -136,7 +144,12 @@ import 'hammerjs';
     UserService,
     TransactionService,
     ThemeService
-      ],
+  ],
   bootstrap: [AppComponent]
+
 })
-export class AppModule { }
+
+
+export class AppModule {
+ 
+}

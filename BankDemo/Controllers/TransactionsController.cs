@@ -63,9 +63,8 @@ namespace BankDemo.Controllers
             string query = @"
                 select sender, sum(debit) as sumDebit
                 from transactions group by sender
-                order by SumDebit desc
-                limit 8;";
-
+                order by SumDebit desc;";
+            
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
             NpgsqlDataReader myReader;
@@ -92,9 +91,8 @@ namespace BankDemo.Controllers
             string query = @"
                 select sender, sum(credit) as sumcredit
                 from transactions group by sender
-                order by SumCredit desc
-                limit 8;";
-
+                order by SumCredit desc;";
+            
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
             NpgsqlDataReader myReader;

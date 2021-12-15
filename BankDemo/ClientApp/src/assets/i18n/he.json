@@ -1,0 +1,43 @@
+{
+  "home": {
+    "title": "דף הבית"
+  },
+  "lang": {
+    "he": "עִברִית",
+    "en": "אנגלית"
+  },
+  "navbar": {
+    "registration": "הירשם",
+    "login": "התחברות",
+    "logout": "להתנתק",
+    "administration": "מִנהָל",
+    "title": "Bank Demo"
+  },
+  "administration": {
+    "title": "מִנהָל",
+    "users": "משתמשים",
+    "transactions": "עסקאות"
+
+  },
+  "users": {
+    "title": "משתמשים",
+    "filter": "לְסַנֵן",
+    "email": "אימייל",
+    "roles": "תפקידים"
+    
+  },
+  "transactions": {
+    "title": "עסקאות",
+    "subtitle2": "שולחי אשראי מובילים",
+    "subtitle1": "המובילים-חיוב-שולחים",
+    "filter": "לְסַנֵן",
+    "id": "תְעוּדַת זֶהוּת",
+    "sender": "שׁוֹלֵחַ",
+    "receiver": "מַקְלֵט",
+    "credit": "אַשׁרַאי",
+    "debit": "חוֹבָה",
+    "date": "תַאֲרִיך"
+   
+  }
+  }
+

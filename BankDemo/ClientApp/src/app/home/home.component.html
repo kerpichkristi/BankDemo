@@ -1,0 +1,26 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="cell">
+        <h1>{{'home.title' | translate}}</h1>
+
+
+        <button type="button" *ngIf="!userService.authorizedUser()" class="btn btn-dark" [routerLinkActive]="['link-active']" [routerLink]="['/users/login']">
+          Log in
+        </button>
+        <div class="container"></div>
+        <br>
+        <button type="button" *ngIf="!userService.authorizedUser()" class="btn btn-dark" [routerLinkActive]="['link-active']" [routerLink]="['/users/register']">
+          Register
+        </button>
+      </div>
+        <br>
+        <img src="../../assets/images/bank.png">
+      
+    </div>
+   
+
+
+  </div>
+
+</body>
