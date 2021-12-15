@@ -4,7 +4,7 @@
 
 ![img](https://i.imgur.com/vd7Z4e7.png)
 
-![img](https://i.imgur.com/illykhg.png)
+![Img](https://imgur.com/OxVwgII)
 
 ## Structure
 
