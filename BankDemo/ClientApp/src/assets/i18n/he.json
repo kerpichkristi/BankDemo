@@ -24,7 +24,7 @@
     "filter": "לְסַנֵן",
     "email": "אימייל",
     "roles": "תפקידים"
-    
+
   },
   "transactions": {
     "title": "עסקאות",
@@ -37,7 +37,25 @@
     "credit": "אַשׁרַאי",
     "debit": "חוֹבָה",
     "date": "תַאֲרִיך"
-   
+
+  },
+  "register": {
+    "register": "הירשם",
+    "create": "צור חשבון חדש",
+    "InvalidEmail": "כתובת אימייל לא חוקית",
+    "email": "אימייל",
+    "characterRequired": "נדרשים מינימום 4 תווים",
+    "password": "סיסמה",
+    "confirmPass": "אשר סיסמה",
+    "mandatory": "השדה הוא חובה",
+    "passDnotMatch": "אשר שהסיסמה אינה תואמת"
+  },
+  "login": {
+    "login": "התחברות",
+    "use": "השתמש באימייל ובסיסמה שלך כדי להיכנס",
+    "email": "אימייל",
+    "password": "סיסמה",
+    "register": "הירשם"
   }
-  }
+}
 

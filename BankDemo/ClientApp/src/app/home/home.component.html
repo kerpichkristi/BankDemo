@@ -6,12 +6,12 @@
 
 
         <button type="button" *ngIf="!userService.authorizedUser()" class="btn btn-dark" [routerLinkActive]="['link-active']" [routerLink]="['/users/login']">
-          Log in
+          {{'navbar.login' | translate}}
         </button>
         <div class="container"></div>
         <br>
         <button type="button" *ngIf="!userService.authorizedUser()" class="btn btn-dark" [routerLinkActive]="['link-active']" [routerLink]="['/users/register']">
-          Register
+          {{'navbar.registration' | translate}}
         </button>
       </div>
         <br>

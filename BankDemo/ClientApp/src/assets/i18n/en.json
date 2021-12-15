@@ -37,6 +37,23 @@
     "credit": "Credit",
     "debit": "Debit",
     "date": "Date"
-    
+  },
+  "register": {
+    "register": "Register",
+    "create": "Create a new account.",
+    "InvalidEmail": "Invalid email address.",
+    "email": "Email",
+    "characterRequired": " Minimum 4 characters required.",
+    "password": "Password",
+    "confirmPass": "Confirm Password",
+    "mandatory": " The field is mandatory.",
+    "passDnotMatch": "Confirm password does not match."
+  },
+  "login": {
+    "login": "Log In",
+    "use": "Use your email and password to log in.",
+    "email": "Email",
+    "password": "Password",
+    "register": "Register as a new user"
   }
 }
