@@ -1,4 +1,4 @@
-﻿using AngAsp.Models;
+﻿using BankDemo.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDemo.Models
+namespace BankDemo.DataBase
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -27,7 +27,7 @@ namespace BankDemo.Models
 
                 entity.Property(e => e.Transactions_Id)
                     .HasColumnName("transactions_id");
-                /*.HasDefaultValueSql("nextval('\"Transactions_Transactions_ID_seq\"'::regclass)");*/
+               
 
                 entity.Property(e => e.Credit)
                     .HasColumnType("money")

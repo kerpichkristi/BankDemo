@@ -11,6 +11,7 @@
 
 # IDEs and editors
 /.idea
+/environment
 .project
 .classpath
 .c9/
@@ -29,6 +30,7 @@
 /.sass-cache
 /connect.lock
 /coverage
+/e2e
 /libpeerconnection.log
 npm-debug.log
 yarn-error.log

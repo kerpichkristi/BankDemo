@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
-namespace AngAsp.Models
+namespace BankDemo.Models
 {
 
 
