@@ -1,12 +1,12 @@
 # BankDemo
 
-## Architecture
+## Back-End Architecture
 
 ![img](https://i.imgur.com/vd7Z4e7.png)
 
 ![Img](https://imgur.com/OxVwgII.png)
 
-## Structure
+## Front-End 
 
 ### Log In
 
