@@ -16,6 +16,7 @@ export class UsersListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
   constructor(private userService: UserService) {
     this.dataSource.filterPredicate = (user: User, filter: string) => {
       return user.Email.toLowerCase().includes(filter.toLowerCase()) ||

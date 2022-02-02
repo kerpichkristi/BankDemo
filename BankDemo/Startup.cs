@@ -131,36 +131,34 @@ namespace BankDemo
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-            CreateRoles(serviceProvider).Wait();
+            /*CreateRoles(serviceProvider).Wait();*/
         }
-
-        
-    
-    private async Task CreateRoles(IServiceProvider serviceProvider)
-    {
-        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-        string[] roleNames = { "Administrator", "Moderator" };
-        IdentityResult roleResult;
-        foreach (var roleName in roleNames)
-        {
-            var roleExist = await roleManager.RoleExistsAsync(roleName);
-            if (!roleExist)
-            {
-                roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
-            }
-        }
-            ApplicationUser userAdmin = await userManager.Users.FirstOrDefaultAsync(u => u.Email == "admintest@mail.ru");
-            if (userAdmin != null)
-            {
-                await userManager.AddToRoleAsync(userAdmin, "Administrator");
-                await userManager.AddToRoleAsync(userAdmin, "Moderator");
-            }
-            ApplicationUser userModerator = await userManager.Users.FirstOrDefaultAsync(u => u.Email == "moderatortest@mail.ru");
-            if (userModerator != null)
-            {
-                await userManager.AddToRoleAsync(userModerator, "Moderator");
-            }
-        }
+        /* private async Task CreateRoles(IServiceProvider serviceProvider)
+         {
+             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+             string[] roleNames = { "Administrator", "Moderator" };
+             IdentityResult roleResult;
+             foreach (var roleName in roleNames)
+             {
+                 var roleExist = await roleManager.RoleExistsAsync(roleName);
+                 if (!roleExist)
+                 {
+                     roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
+                 }
+             }
+                 ApplicationUser userAdmin = await userManager.Users.FirstOrDefaultAsync(u => u.Email == "admintest@mail.ru");
+                 if (userAdmin != null)
+                 {
+                     await userManager.AddToRoleAsync(userAdmin, "Administrator");
+                     await userManager.AddToRoleAsync(userAdmin, "Moderator");
+                 }
+                 ApplicationUser userModerator = await userManager.Users.FirstOrDefaultAsync(u => u.Email == "moderatortest@mail.ru");
+                 if (userModerator != null)
+                 {
+                     await userManager.AddToRoleAsync(userModerator, "Moderator");
+                 }
+             }
+         }*/
     }
 }
