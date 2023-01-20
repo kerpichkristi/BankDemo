@@ -1,5 +1,8 @@
 # BankDemo
 
+To run the project need to install .net 5.0 and node.js 16.14.0.
+After that to install node_module. To do this need to run "npm install" command in ClientApp folder
+
 ## Back-End Architecture
 
 ![img](https://i.imgur.com/vd7Z4e7.png)
