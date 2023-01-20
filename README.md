@@ -1,7 +1,11 @@
 # BankDemo
 
-To run the project need to install .net 5.0 and node.js 16.14.0.
-After that to install node_module. To do this need to run "npm install" command in ClientApp folder
+To run the project needs to 
+1) Install .net 5.0 and node.js 16.14.0.
+2) Install node_module ( run "npm install" command in ClientApp folder )
+3) Create BankDemo database in postgres and run "dotnet ef database update"
+
+The application automatically creates two users "admintest@mail.ru" and "moderatortest@mail.ru" with password "qwerty1234"
 
 ## Back-End Architecture
 
