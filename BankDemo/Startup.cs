@@ -15,6 +15,11 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Text;
 using System.Threading.Tasks;
+using BankDemo.Core.Services;
+using Microsoft.OpenApi.Models;
+using System.IO;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace BankDemo
 {
@@ -71,13 +76,42 @@ namespace BankDemo
                     };
                 });
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
+                c.AddSecurityDefinition("Bearer",
+                        new OpenApiSecurityScheme
+                        {
+                            Description = "Please enter into field the word 'Bearer' following by space and JWT. Example: Bearer ExAmplE",
+                            Name = "Authorization",
+                            In = ParameterLocation.Header,
+                            Type = SecuritySchemeType.ApiKey,
+                            Scheme = "Bearer"
+                        });
+                        
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                        },
+                        new List<string>()}});
+            });
+
             services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
             services.AddControllers()
                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -131,34 +165,20 @@ namespace BankDemo
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-            /*CreateRoles(serviceProvider).Wait();*/
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger(c => c.PreSerializeFilters.Add((doc, req) => doc.Servers.Clear()));
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
+                c.RoutePrefix = string.Empty;
+            });
+            
+            CreateRolesService.CreateRoles(serviceProvider).Wait();
+            CreateInitialUsersService.CreateUsers(serviceProvider).Wait();
         }
-        /* private async Task CreateRoles(IServiceProvider serviceProvider)
-         {
-             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-             string[] roleNames = { "Administrator", "Moderator" };
-             IdentityResult roleResult;
-             foreach (var roleName in roleNames)
-             {
-                 var roleExist = await roleManager.RoleExistsAsync(roleName);
-                 if (!roleExist)
-                 {
-                     roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
-                 }
-             }
-                 ApplicationUser userAdmin = await userManager.Users.FirstOrDefaultAsync(u => u.Email == "admintest@mail.ru");
-                 if (userAdmin != null)
-                 {
-                     await userManager.AddToRoleAsync(userAdmin, "Administrator");
-                     await userManager.AddToRoleAsync(userAdmin, "Moderator");
-                 }
-                 ApplicationUser userModerator = await userManager.Users.FirstOrDefaultAsync(u => u.Email == "moderatortest@mail.ru");
-                 if (userModerator != null)
-                 {
-                     await userManager.AddToRoleAsync(userModerator, "Moderator");
-                 }
-             }
-         }*/
     }
 }

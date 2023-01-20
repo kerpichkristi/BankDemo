@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
 namespace BankDemo.Models
 {
-
-
     public partial class TransactionModel
     {
 

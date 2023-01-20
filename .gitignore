@@ -5,3 +5,5 @@
 /.vs
 *.drawio
 *.png
+.vscode/launch.json
+.vscode/tasks.json

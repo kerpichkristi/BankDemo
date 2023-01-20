@@ -5,11 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BankDemo.Controllers
@@ -21,43 +18,24 @@ namespace BankDemo.Controllers
 
         private readonly IConfiguration _configuration;
         private readonly ApplicationDbContext _applicationDbcontext;
-
         public TransactionsController(IConfiguration configuration, ApplicationDbContext applicationDbContext)
         {
-
             _configuration = configuration;
             _applicationDbcontext = applicationDbContext;
         }
 
-
-
+        //POST : /api/Transactions
         [HttpGet]
         [Authorize(Roles = "Administrator")]
-        //POST : /api/Transactions
-
         public async Task<ActionResult<IEnumerable<TransactionModel>>> Transactions()
         {
-            List<TransactionModel> TransactionViewModel = new List<TransactionModel>();
-            List<TransactionModel> transactionModels = await _applicationDbcontext.TransactionModels.ToListAsync();
-            foreach (TransactionModel transactionModel in transactionModels)
-            {
-                TransactionViewModel.Add(new TransactionModel()
-                {
-                    Transactions_Id = transactionModel.Transactions_Id,
-                    Date = transactionModel.Date,
-                    Debit = transactionModel.Debit,
-                    Credit = transactionModel.Credit,
-                    Sender = transactionModel.Sender,
-                    Receiver = transactionModel.Receiver
-                });
-            }
-            return TransactionViewModel;
+            var transactionModels = await _applicationDbcontext.TransactionModels.ToListAsync();       
+            return transactionModels;
         }
 
-        [HttpGet]
-        [Route("PieChart1")]
-        [Authorize(Roles = "Administrator")]
         //POST : /api/Transactions/PieChart1
+        [HttpGet("PieChart1")]
+        [Authorize(Roles = "Administrator")]
         public JsonResult PieChart1()
         {
             string query = @"
@@ -80,12 +58,11 @@ namespace BankDemo.Controllers
                 }
             }
             return new JsonResult(table);
-
         }
-        [HttpGet]
-        [Route("PieChart2")]
-        [Authorize(Roles = "Administrator")]
+
         //POST : /api/Transactions/PieChart2
+        [HttpGet("PieChart2")]
+        [Authorize(Roles = "Administrator")]    
         public JsonResult PieChart2()
         {
             string query = @"
@@ -108,13 +85,11 @@ namespace BankDemo.Controllers
                 }
             }
             return new JsonResult(table);
-
         }
 
+        //POST : /api/Transactions
         [HttpGet("{Transactions_Id}")]
         [Authorize(Roles = "Administrator")]
-        //POST : /api/Transactions
-
         public async Task<ActionResult<TransactionModel>> GetTransactions(int transactions_id)
         {
             var transactionModel = await _applicationDbcontext.TransactionModels.FindAsync(transactions_id);
@@ -124,20 +99,10 @@ namespace BankDemo.Controllers
                 return NotFound();
             }
 
-            TransactionModel TransactionViewModel = new TransactionModel()
-            {
-                Transactions_Id = transactionModel.Transactions_Id,
-                Date = transactionModel.Date,
-                Debit = transactionModel.Debit,
-                Credit = transactionModel.Credit,
-                Sender = transactionModel.Sender,
-                Receiver = transactionModel.Receiver
-            };
-
-            return TransactionViewModel;
+            return transactionModel;
         }
 
-        // DELETE: api/Transactions/5
+        // DELETE: api/Transactions/
         [HttpDelete("{Transactions_Id}")]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<TransactionModel>> DeleteTransaction(int transactions_id)
@@ -151,18 +116,10 @@ namespace BankDemo.Controllers
             _applicationDbcontext.TransactionModels.Remove(transactionModel);
             await _applicationDbcontext.SaveChangesAsync();
 
-            return new TransactionModel()
-            {
-                Transactions_Id = transactionModel.Transactions_Id,
-                Date = transactionModel.Date,
-                Debit = transactionModel.Debit,
-                Credit = transactionModel.Credit,
-                Sender = transactionModel.Sender,
-                Receiver = transactionModel.Receiver
-            };
+            return transactionModel;
         }
 
-        // PUT: api/Transactions/5
+        // PUT: api/Transactions/
         [HttpPut("{Transactions_Id}")]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> PutUser(int transactions_id, TransactionModel model)
@@ -181,7 +138,6 @@ namespace BankDemo.Controllers
 
             return NoContent();
         }
-
     }
 }
 
